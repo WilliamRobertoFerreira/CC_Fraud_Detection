@@ -46,3 +46,15 @@ ax.set_title("Target Variable Value Counts")
 # )
 
 # data processing
+
+# standardize features by removing the mean and scaling to unit variance
+big_raw_data.iloc[:, 1:30] = StandardScaler().fit_transform(big_raw_data.iloc[:, 1:30])
+data_matrix = big_raw_data.values
+
+x = data_matrix[:1:30]
+y = data_matrix[:, 30]
+
+# data normalization with l1
+x = normalize(x, norm="l1")
+
+print("x.shape= ", x.shape, "y.shape= ", y.shape)
