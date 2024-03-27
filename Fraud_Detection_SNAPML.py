@@ -51,10 +51,20 @@ ax.set_title("Target Variable Value Counts")
 big_raw_data.iloc[:, 1:30] = StandardScaler().fit_transform(big_raw_data.iloc[:, 1:30])
 data_matrix = big_raw_data.values
 
-x = data_matrix[:1:30]
+x = data_matrix[:, 1:30]
 y = data_matrix[:, 30]
 
 # data normalization with l1
 x = normalize(x, norm="l1")
 
-print("x.shape= ", x.shape, "y.shape= ", y.shape)
+# print("x.shape= ", x.shape, "y.shape= ", y.shape)
+
+# train/test split
+x_train, x_test, y_train, y_test = train_test_split(
+    x, y, test_size=0.3, random_state=42, stratify=y
+)
+print("x train shape= ", x_train.shape, "y train shape= ", y_train.shape)
+print("x test shape= ", x_test.shape, "y test shape= ", y_test.shape)
+
+
+# decision tree classifier using sklearn
