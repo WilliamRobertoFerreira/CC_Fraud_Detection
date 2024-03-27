@@ -5,9 +5,10 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.metrics import roc_auc_score
+from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import normalize, StandardScaler
-from sklearn.utils.class_weight import compute_class_weight
+from sklearn.utils.class_weight import compute_sample_weight
 
 warnings.filterwarnings("ignore")
 
@@ -63,8 +64,14 @@ x = normalize(x, norm="l1")
 x_train, x_test, y_train, y_test = train_test_split(
     x, y, test_size=0.3, random_state=42, stratify=y
 )
-print("x train shape= ", x_train.shape, "y train shape= ", y_train.shape)
-print("x test shape= ", x_test.shape, "y test shape= ", y_test.shape)
+# print("x train shape= ", x_train.shape, "y train shape= ", y_train.shape)
+# print("x test shape= ", x_test.shape, "y test shape= ", y_test.shape)
 
 
-# decision tree classifier using sklearn
+# decision tree classifier using sklearn decision tree
+b_train = compute_sample_weight("balanced", y_train)
+sklearn_dt = DecisionTreeClassifier(max_depth=4, random_state=35)
+t_zero = time.time()
+sklearn_dt.fit(x_train, y_train, sample_weight=b_train)
+sklearn_time = time.time() - t_zero
+print("Sklearn training time (s):  {0:.5f}".format(sklearn_time))
