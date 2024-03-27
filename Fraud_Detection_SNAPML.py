@@ -31,4 +31,18 @@ sizes = big_raw_data.Class.value_counts().values
 fig, ax = plt.subplots()
 ax.pie(sizes, labels=labels, autopct="%1.3f%%")
 ax.set_title("Target Variable Value Counts")
-plt.show()
+# plt.show()
+
+
+# Distribuition of the differents amounts CC transactions, plotting 90%
+# plt.hist(big_raw_data.Amount.values, 6, histtype="bar", facecolor="g")
+# plt.show()
+
+# print("Minimum amount value is ", np.min(big_raw_data.Amount.values))
+# print("Maximum amount value is ", np.max(big_raw_data.Amount.values))
+# print(
+#     "90% of the transactions have an amount less or equal than ",
+#     np.percentile(raw_data.Amount.values, 90),
+# )
+
+# data processing
